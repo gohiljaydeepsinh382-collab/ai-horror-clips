@@ -1,29 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Horror Clips</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Horror Clips</title>
 
-<body>
-  <header>
-    <h1>Horror Clips</h1>
-    <div id="coinBox">Coins: <span id="coins">0</span></div>
-  </header>
+    <style>
+      body {
+        background: #000;
+        color: #fff;
+        font-family: Arial;
+        text-align: center;
+        padding: 10px;
+      }
 
-  <main>
-    <video id="videoPlayer" controls></video>
+      video {
+        width: 100%;
+        max-width: 480px;
+        border: 2px solid #444;
+        margin-top: 15px;
+      }
 
-    <div class="btns">
-      <button id="playBtn">Play</button>
-      <button id="nextBtn">Next Clip</button>
+      button {
+        background: red;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        font-size: 18px;
+        margin: 10px;
+        border-radius: 5px;
+      }
+
+      .coin-box {
+        background: #111;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        display: inline-block;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <h2>🔥 AI Horror Clips 🔥</h2>
+
+    <div class="coin-box">
+      Coins: <span id="coins">0</span>
     </div>
 
-    <p>Watch & Earn horror clips</p>
-  </main>
+    <video id="videoPlayer" controls></video>
 
-  <script src="script.js"></script>
-</body>
+    <br>
+
+    <button id="playBtn">▶ Play</button>
+    <button id="nextClipBtn">⏭ Next Clip</button>
+
+    <script src="script.js"></script>
+  </body>
 </html>
