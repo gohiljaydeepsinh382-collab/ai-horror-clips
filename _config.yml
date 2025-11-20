@@ -1,0 +1,5 @@
+include:
+  - manifest.json
+  - sw.js
+  - icon192.png
+  - icon512.png
