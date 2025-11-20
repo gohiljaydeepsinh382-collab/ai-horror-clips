@@ -1,43 +1,27 @@
-<!doctype html>
-<html lang="hi">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Horror Clips - Watch & Earn</title>
-
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icon-192.png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Horror Clips</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
   <header>
     <h1>Horror Clips</h1>
-    <div id="coins">Coins: <span id="coin-count">0</span></div>
+    <div id="coinBox">Coins: <span id="coins">0</span></div>
   </header>
 
   <main>
-    <!-- VIDEO: बदल सकते हो - assets/video.mp4 या YouTube embed -->
-    <video id="clip" width="720" controls playsinline>
-      <source src="assets/video.mp4" type="video/mp4">
-      आपका ब्राउज़र वीडियो सपोर्ट नहीं करता।
-    </video>
+    <video id="videoPlayer" controls></video>
 
-    <div id="controls">
-      <button id="btn-play">Play</button>
-      <button id="btn-next">Next Clip</button>
+    <div class="btns">
+      <button id="playBtn">Play</button>
+      <button id="nextBtn">Next Clip</button>
     </div>
 
-    <!-- Ad placeholder — हर वीडियो के बाद शो होगा -->
-    <div id="ad-modal" class="hidden">
-      <div class="ad-box">
-        <h2>Sponsored</h2>
-        <p>यहाँ पर आप असली ad जोड़ेंगे (AdMob/AdSense)</p>
-        <button id="close-ad">Close Ad</button>
-      </div>
-    </div>
-
-    <!-- Short message / status -->
-    <div id="status">Watch & Earn horror clips</div>
+    <p>Watch & Earn horror clips</p>
   </main>
 
   <script src="script.js"></script>
