@@ -1,61 +1,36 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Horror Clips</title>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Horror Clips</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="title">🔥 AI Horror Clips 🔥</div>
+    <div class="coins">Coins: <span id="coinCount">0</span></div>
+  </header>
 
-    <style>
-      body {
-        background: #000;
-        color: #fff;
-        font-family: Arial;
-        text-align: center;
-        padding: 10px;
-      }
+  <main class="container">
+    <div class="player-wrap">
+      <!-- Video element (source will be set by script.js) -->
+      <video id="player" controls playsinline webkit-playsinline></video>
 
-      video {
-        width: 100%;
-        max-width: 480px;
-        border: 2px solid #444;
-        margin-top: 15px;
-      }
+      <!-- Controls -->
+      <div class="controls">
+        <button id="btn-play" class="btn">Play / Pause</button>
+        <button id="btn-next" class="btn btn-red">Next Clip »»</button>
+      </div>
 
-      button {
-        background: red;
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        font-size: 18px;
-        margin: 10px;
-        border-radius: 5px;
-      }
-
-      .coin-box {
-        background: #111;
-        padding: 10px;
-        margin-top: 10px;
-        border-radius: 5px;
-        display: inline-block;
-        font-size: 18px;
-      }
-    </style>
-  </head>
-
-  <body>
-
-    <h2>🔥 AI Horror Clips 🔥</h2>
-
-    <div class="coin-box">
-      Coins: <span id="coins">0</span>
+      <div id="status" class="status">Ready</div>
     </div>
+  </main>
 
-    <video id="videoPlayer" controls></video>
+  <footer class="footer">
+    <small>Made with · Watch & Earn demo · Host: GitHub Pages</small>
+  </footer>
 
-    <br>
-
-    <button id="playBtn">▶ Play</button>
-    <button id="nextClipBtn">⏭ Next Clip</button>
-
-    <script src="script.js"></script>
-  </body>
+  <script src="script.js"></script>
+</body>
 </html>
