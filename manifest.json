@@ -1,19 +1,20 @@
 {
   "name": "FrightX - AI Horror Clips",
   "short_name": "FrightX",
-  "start_url": "/",
+  "start_url": "/ai-horror-clips/",
+  "scope": "/ai-horror-clips/",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
-  "description": "Watch the scariest AI-generated horror clips!",
+  "description": "Watch the scariest AI horror clips.",
   "icons": [
     {
-      "src": "icon192.png",
+      "src": "/ai-horror-clips/icon192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icon512.png",
+      "src": "/ai-horror-clips/icon512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
