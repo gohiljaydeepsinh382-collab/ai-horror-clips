@@ -1,83 +1,76 @@
-let clips = [
-  "Ai --gorilla🦍, scorpion🦂 and shark 🦈.mp4",
-  "Panda Saved The Baby Who Was Believed To Be Dead.mp4",
-  "Panda Saves Baby – A Real Hero in Fur.mp4",
-  "Pin page.mp4",
-  "clipai_video_20251118_182913.mp4",
-  "clipai_video_20251118_183320.mp4",
-  "clipai_video_20251118_183324.mp4",
-  "clipai_video_20251118_183328.mp4",
-  "clipai_video_20251118_183338.mp4",
-  "clipai_video_20251118_183344.mp4",
-  "clipai_video_20251118_183350.mp4",
-  "clipai_video_20251118_183358.mp4",
-  "clipai_video_20251118_183410.mp4",
-  "clipai_video_20251118_183611.mp4",
-  "clipai_video_20251118_183615.mp4",
-  "clipai_video_20251118_183627.mp4",
-  "clipai_video_20251118_183631.mp4",
-  "clipai_video_20251118_183714.mp4",
-  "clipai_video_20251118_183815.mp4",
-  "clipai_video_20251118_183825.mp4",
-  "clipai_video_20251118_224319.mp4",
-  "clipai_video_20251118_224613.mp4",
-  "clipai_video_20251118_224708.mp4",
-  "the emotional story in parrot.mp4"
-];
+const repoUser = "gohiljaydeepsinh382-collab";
+const repoName = "ai-horror-clips";
 
-let currentIndex = 0;
-let coins = localStorage.getItem("coins") ? parseInt(localStorage.getItem("coins")) : 0;
-let userActivatedSound = false; // 🔥 First tap → sound enabled permanently
+const player = document.getElementById("player");
+const status = document.getElementById("status");
+const titleEl = document.getElementById("title");
+const btnPlay = document.getElementById("btnPlay");
+const btnNext = document.getElementById("btnNext");
+const coinsEl = document.getElementById("coins");
 
-document.getElementById("coins").innerText = coins;
-const video = document.getElementById("videoPlayer");
+let videos = [];
+let index = 0;
+let coins = Number(localStorage.getItem("coins") || 0);
+coinsEl.textContent = coins;
 
-function loadClip(index) {
-  video.src = clips[index];
-  video.load();
+async function loadVideoList() {
+  status.textContent = "Loading videos...";
 
-  if (userActivatedSound) {
-    video.muted = false; // sound ON after first tap
+  const apiURL = `https://api.github.com/repos/${repoUser}/${repoName}/contents/`;
+
+  const res = await fetch(apiURL);
+  const files = await res.json();
+
+  videos = files
+    .filter(f => f.name.toLowerCase().endsWith(".mp4"))
+    .map(f => f.download_url);
+
+  if (videos.length === 0) {
+    status.textContent = "No videos found!";
+    return;
+  }
+
+  status.textContent = `Found ${videos.length} videos`;
+  loadClip(0);
+}
+
+function loadClip(i) {
+  index = i % videos.length;
+  const url = videos[index];
+
+  player.src = url;
+  player.load();
+
+  let name = url.split("/").pop();
+  titleEl.textContent = name;
+  status.textContent = "Loaded: " + name;
+
+  player.muted = true;
+  player.play().catch(() => {
+    status.textContent = "Tap Play to start";
+  });
+}
+
+btnPlay.addEventListener("click", async () => {
+  if (player.paused) {
+    player.muted = false;
+    await player.play();
+    status.textContent = "Playing";
   } else {
-    video.muted = true;  // autoplay requires mute
+    player.pause();
+    status.textContent = "Paused";
   }
-
-  video.play().catch(() => {});
-}
-
-document.getElementById("playBtn").addEventListener("click", () => {
-  if (!userActivatedSound) {
-    userActivatedSound = true;
-    video.muted = false; // 🔥 First manual tap → unmute
-  }
-
-  if (video.paused) video.play();
-  else video.pause();
 });
 
-document.getElementById("nextBtn").addEventListener("click", () => {
-  nextClip();
+btnNext.addEventListener("click", () => {
+  loadClip(index + 1);
 });
 
-function nextClip() {
-  currentIndex = (currentIndex + 1) % clips.length;
-  loadClip(currentIndex);
-  markReady();
-}
-
-// Auto coin earn after video ends
-video.addEventListener("ended", () => {
-  coins += 1;
+player.addEventListener("ended", () => {
+  coins++;
   localStorage.setItem("coins", coins);
-  document.getElementById("coins").innerText = coins;
-
-  nextClip();
+  coinsEl.textContent = coins;
+  loadClip(index + 1);
 });
 
-// UI Status
-function markReady() {
-  document.getElementById("status").innerText = "Ready";
-}
-
-// Load first clip
-loadClip(currentIndex);
+loadVideoList();
