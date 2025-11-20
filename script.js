@@ -1,11 +1,14 @@
+// ========== VIDEO PLAYER ELEMENTS ==========
 const videoPlayer = document.getElementById("videoPlayer");
 const playBtn = document.getElementById("playBtn");
 const nextClipBtn = document.getElementById("nextClipBtn");
 const coinsDisplay = document.getElementById("coins");
 
-let coins = 0;
+// ========== COINS (SAVED IN LOCAL STORAGE) ==========
+let coins = Number(localStorage.getItem("hc_coins") || 0);
+coinsDisplay.innerText = coins;
 
-// All video filenames from your GitHub repo
+// ========== ALL VIDEO FILES (YOUR COMPLETE LIST) ==========
 const clips = [
   "Ai --gorilla🦍, scorpion🦂 and shark 🦈.mp4",
   "Pin page.mp4",
@@ -33,26 +36,33 @@ const clips = [
   "Panda Saved The Baby Who Was Believed To Be Dead. #ai #baby #panda #shorts #kids #aipanda #aishorts.mp4"
 ];
 
-// Auto generate raw Github path
-const baseURL = "https://raw.githubusercontent.com/gohiljaydeepsinh382-collab/ai-horror-clips/main/";
+// ========== BASE RAW URL (DIRECT VIDEO LINK) ==========
+const baseURL =
+  "https://raw.githubusercontent.com/gohiljaydeepsinh382-collab/ai-horror-clips/main/";
 
+// ========== CURRENT CLIP INDEX ==========
 let currentIndex = 0;
 
+// ========== LOAD A VIDEO ==========
 function loadClip() {
-  videoPlayer.src = baseURL + encodeURIComponent(clips[currentIndex]);
+  const filename = clips[currentIndex];
+  videoPlayer.src = baseURL + encodeURIComponent(filename);
 }
 
+// ========== PLAY BUTTON ==========
 playBtn.addEventListener("click", () => {
   videoPlayer.play();
 });
 
+// ========== NEXT CLIP BUTTON ==========
 nextClipBtn.addEventListener("click", () => {
   coins++;
   coinsDisplay.innerText = coins;
+  localStorage.setItem("hc_coins", coins);
 
   currentIndex = (currentIndex + 1) % clips.length;
   loadClip();
 });
 
-// Load first clip
+// ========== AUTO LOAD FIRST CLIP ==========
 loadClip();
