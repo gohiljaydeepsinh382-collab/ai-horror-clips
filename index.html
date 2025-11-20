@@ -3,29 +3,31 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AI Horror Clips</title>
+<title>🔥 AI Horror Clips 🔥</title>
 <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
-<header class="topbar">
-  <div class="title">🔥 AI Horror Clips 🔥</div>
-  <div class="coins">Coins: <span id="coins">0</span></div>
-</header>
 
-<main class="container">
-  <div class="card">
-    <video id="player" class="player" playsinline muted></video>
+<h1 class="title">🔥 AI Horror Clips 🔥</h1>
+<div id="coinsBox">Coins: <span id="coins">0</span></div>
 
-    <div class="controls">
-      <button id="btnPlay" class="btn blue">Play / Pause</button>
-      <button id="btnNext" class="btn red">Next Clip »»</button>
+<div class="playerBox">
+    <video 
+        id="videoPlayer"
+        controls
+        playsinline
+        webkit-playsinline
+        preload="metadata"
+        style="width:100%;border-radius:15px;background:#000;">
+    </video>
+
+    <div class="btnRow">
+        <button id="playBtn">Play / Pause</button>
+        <button id="nextBtn" class="redBtn">Next Clip »»</button>
     </div>
 
-    <div id="status" class="status">Loading videos…</div>
-    <div id="title" class="videotitle"></div>
-  </div>
-</main>
+    <p id="videoName">Ready</p>
+</div>
 
 <script src="script.js"></script>
 </body>
