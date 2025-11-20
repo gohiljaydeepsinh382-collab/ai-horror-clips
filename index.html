@@ -2,33 +2,145 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>🔥 AI Horror Clips 🔥</title>
-<link rel="stylesheet" href="style.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FrightX - AI Horror Clips</title>
+
+<!-- PWA Essentials -->
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icon192.png">
+<link rel="apple-touch-icon" href="icon192.png">
+<meta name="theme-color" content="#000000">
+
+<style>
+    body {
+        background: #001f29;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: white;
+        text-align: center;
+    }
+
+    h1 {
+        margin-top: 20px;
+        font-size: 26px;
+    }
+
+    #coinsBox {
+        background: rgba(0,0,0,0.4);
+        padding: 8px 16px;
+        border-radius: 12px;
+        font-size: 18px;
+        display: inline-block;
+        margin-top: 10px;
+    }
+
+    video {
+        width: 90%;
+        max-width: 480px;
+        border-radius: 14px;
+        margin-top: 20px;
+        background: black;
+    }
+
+    button {
+        padding: 12px 20px;
+        font-size: 16px;
+        margin: 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    #playBtn {
+        background: #007BFF;
+        color: white;
+    }
+
+    #nextBtn {
+        background: #FF4136;
+        color: white;
+    }
+
+    #status {
+        margin-top: 12px;
+        font-size: 16px;
+        opacity: 0.8;
+    }
+</style>
+
 </head>
+
 <body>
 
-<h1 class="title">🔥 AI Horror Clips 🔥</h1>
+<h1>🔥 FrightX - AI Horror Clips 🔥</h1>
+
 <div id="coinsBox">Coins: <span id="coins">0</span></div>
 
-<div class="playerBox">
-    <video 
-        id="videoPlayer"
-        controls
-        playsinline
-        webkit-playsinline
-        preload="metadata"
-        style="width:100%;border-radius:15px;background:#000;">
-    </video>
+<video id="videoPlayer" controls playsinline>
+    <source id="sourceVideo" src="" type="video/mp4">
+</video>
 
-    <div class="btnRow">
-        <button id="playBtn">Play / Pause</button>
-        <button id="nextBtn" class="redBtn">Next Clip »»</button>
-    </div>
+<br>
 
-    <p id="videoName">Ready</p>
-</div>
+<button id="playBtn">Play / Pause</button>
+<button id="nextBtn">Next Clip »»</button>
 
-<script src="script.js"></script>
+<p id="status">Ready</p>
+
+<script>
+    // ⭐ Your uploaded video file names yaha likho
+    let clips = [
+        "clipai_video_20251118_183825.mp4",
+        "clipai_video_20251118_183815.mp4",
+        "clipai_video_20251118_183714.mp4",
+        "clipai_video_20251118_183631.mp4",
+        "clipai_video_20251118_183627.mp4",
+        "clipai_video_20251118_183615.mp4",
+        "clipai_video_20251118_183611.mp4",
+        "clipai_video_20251118_183410.mp4",
+        "clipai_video_20251118_183358.mp4",
+        "clipai_video_20251118_183350.mp4",
+        "clipai_video_20251118_183344.mp4",
+        "clipai_video_20251118_183338.mp4",
+        "clipai_video_20251118_183328.mp4"
+    ];
+
+    let index = 0;
+    let coins = 0;
+
+    const video = document.getElementById("videoPlayer");
+    const src = document.getElementById("sourceVideo");
+    const coinsDisplay = document.getElementById("coins");
+
+    function loadClip() {
+        src.src = clips[index];
+        video.load();
+        video.play().catch(()=>{});
+        document.getElementById("status").innerText = "Loaded: " + clips[index];
+    }
+
+    document.getElementById("playBtn").onclick = () => {
+        if (video.paused) video.play();
+        else video.pause();
+    };
+
+    document.getElementById("nextBtn").onclick = () => {
+        index = (index + 1) % clips.length;
+        loadClip();
+        coins++;
+        coinsDisplay.innerText = coins;
+    };
+
+    video.onended = () => {
+        index = (index + 1) % clips.length;
+        loadClip();
+        coins++;
+        coinsDisplay.innerText = coins;
+    };
+
+    loadClip();
+</script>
+
 </body>
 </html>
